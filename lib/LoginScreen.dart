@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'homepage.dart'; // Import the homepage widget
+import 'Homepage.dart';
 import 'signup.dart'; // Import the signup page widget
 import 'database_helper.dart'; // Import the database helper file
 
@@ -27,7 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => Homepage(), // Replace Homepage() with your actual homepage widget
+            builder: (context) => HomePage(), // Replace Homepage() with your actual homepage widget
           ),
         );
       } else {

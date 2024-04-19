@@ -4,13 +4,11 @@ class GameUtils {
   int _winningScore;
   int _myScore = 0;
   int _oppScore = 0;
-  String _myMove;
-  String _oppMove;
+  String? _myMove;
+  String? _oppMove;
   final _random = Random();
 
-  GameUtils(int winningScore) {
-    _winningScore = winningScore;
-  }
+  GameUtils(this._winningScore);
 
   String play(String move) {
     _myMove = move;

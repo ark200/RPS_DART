@@ -13,7 +13,7 @@ class _SignupScreenState extends State<SignupScreen> {
   String _password = '';
   String _confirmPassword = '';
 
-  final DatabaseHelper _databaseHelper = DatabaseHelper._instance;
+  final DatabaseHelper _databaseHelper = DatabaseHelper.instance;
 
   @override
   Widget build(BuildContext context) {

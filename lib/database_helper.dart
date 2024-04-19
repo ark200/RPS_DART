@@ -2,11 +2,11 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class DatabaseHelper {
-  static final DatabaseHelper _instance = DatabaseHelper._internal();
+  static final DatabaseHelper instance = DatabaseHelper._internal();
   static Database? _database;
 
   factory DatabaseHelper() {
-    return _instance;
+    return instance;
   }
 
   DatabaseHelper._internal();
@@ -39,7 +39,7 @@ class DatabaseHelper {
   }
 
   Future<bool> isUsernameTaken(String username) async{
-    Database db = await _instance.database;
+    Database db = await instance.database;
     List<Map<String, dynamic>> result = await db.query('useres',
     where: 'username = ?',
     whereArgs: [username],);

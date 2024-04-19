@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import 'database_helper2.dart';
 
@@ -8,8 +9,8 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  List<Map<String, dynamic>> _gameLogs;
-  List<Widget> _gameLogWidgets;
+  List<Map<String, dynamic>>? _gameLogs;
+  List<Widget>? _gameLogWidgets;
   final Database2Helper _databaseHelper = Database2Helper.instance;
 
   @override
@@ -23,8 +24,9 @@ class _HistoryPageState extends State<HistoryPage> {
     final gameLogs = await db.query(Database2Helper.table);
     setState(() {
       _gameLogs = gameLogs;
-      _gameLogWidgets = _gameLogs.map((log) {
-        final date = DateTime.fromMillisecondsSinceEpoch(log[Database2Helper.date]);
+      _gameLogWidgets = _gameLogs?.map((log) {
+        final date =
+            DateTime.fromMillisecondsSinceEpoch(log[Database2Helper.date]);
         final formattedDate = DateFormat.yMd().add_jm().format(date);
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +46,7 @@ class _HistoryPageState extends State<HistoryPage> {
     return Scaffold(
       body: Container(
         child: ListView(
-          children: _gameLogWidgets,
+          children: _gameLogWidgets ?? [],
         ),
       ),
     );

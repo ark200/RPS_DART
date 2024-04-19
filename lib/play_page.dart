@@ -1,9 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-import 'dart:js';
 import 'package:flutter/material.dart';
-import 'package:test3/GameUtils.dart';
+import 'package:test3/gameutils.dart';
 import 'package:test3/database_helper2.dart';
 import 'package:test3/gameutils.dart';
 
@@ -19,7 +18,7 @@ class PlayPage extends StatefulWidget {
 }
 
 class _PlayPageState extends State<PlayPage> {
-  GameUtils gameUtils;
+  GameUtils? gameUtils;
   int myScore = 0;
   int oppScore = 0;
   String result = '';
@@ -28,7 +27,7 @@ class _PlayPageState extends State<PlayPage> {
   @override
   void initState() {
     super.initState();
-    gameUtils = GameUtils(widget.winningScore, context);
+    gameUtils = GameUtils(widget.winningScore);
   }
 
   void updateUI(String newResult, int newMyScore, int newOppScore) {
@@ -40,7 +39,7 @@ class _PlayPageState extends State<PlayPage> {
 
     if (myScore >= widget.winningScore || oppScore >= widget.winningScore) {
       saveRecord();
-      showDialog();
+      _showDialog();
     }
   }
 
@@ -59,7 +58,7 @@ class _PlayPageState extends State<PlayPage> {
     await db.insert(Database2Helper.table, record);
   }
 
-  void showDialog() {
+  void _showDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -97,22 +96,22 @@ class _PlayPageState extends State<PlayPage> {
             SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                final newResult = gameUtils.play('rock');
-                updateUI(newResult, gameUtils.getMyScore(), gameUtils.getOppScore());
+                final newResult = gameUtils!.play('rock');
+                updateUI(newResult, gameUtils!.myScore, gameUtils!.oppScore);
               },
               child: Text('Rock'),
             ),
             ElevatedButton(
               onPressed: () {
-                final newResult = gameUtils.play('paper');
-                updateUI(newResult, gameUtils.getMyScore(), gameUtils.getOppScore());
+                final newResult = gameUtils!.play('paper');
+                updateUI(newResult, gameUtils!.myScore, gameUtils!.oppScore);
               },
               child: Text('Paper'),
             ),
             ElevatedButton(
               onPressed: () {
-                final newResult = gameUtils.play('scissors');
-                updateUI(newResult, gameUtils.getMyScore(), gameUtils.getOppScore());
+                final newResult = gameUtils!.play('scissors');
+                updateUI(newResult, gameUtils!.myScore, gameUtils!.oppScore);
               },
               child: Text('Scissors'),
             ),
